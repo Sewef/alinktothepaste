@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paste options</title>
+  </head>
+  <body>
+    <form class="paste-options" id="paste-options">
+      <div class="paste-choice" role="group" aria-labelledby="id-label">
+        <span class="paste-choice-label" id="id-label">ID</span>
+        <div class="segmented-control">
+          <label>
+            <input type="radio" name="id" value="new" />
+            <span>New</span>
+          </label>
+          <label>
+            <input type="radio" name="id" value="unchanged"  checked />
+            <span>No change</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="paste-choice" role="group" aria-labelledby="ownership-label">
+        <span class="paste-choice-label" id="ownership-label">Ownership</span>
+        <div class="segmented-control">
+          <label>
+            <input type="radio" name="ownership" value="take" />
+            <span>Take</span>
+          </label>
+          <label>
+            <input type="radio" name="ownership" value="unchanged" checked />
+            <span>No change</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="paste-choice" role="group" aria-labelledby="position-label">
+        <span class="paste-choice-label" id="position-label">Position</span>
+        <div class="segmented-control">
+          <label>
+            <input type="radio" name="position" value="here" />
+            <span>Here</span>
+          </label>
+          <label>
+            <input type="radio" name="position" value="unchanged" checked />
+            <span>No change</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="paste-choice" role="group" aria-labelledby="visible-label">
+        <span class="paste-choice-label" id="visible-label">Visible</span>
+        <div class="segmented-control">
+          <label>
+            <input type="radio" name="visible" value="yes" />
+            <span>Yes</span>
+          </label>
+          <label>
+            <input type="radio" name="visible" value="no" />
+            <span>No</span>
+          </label>
+          <label>
+            <input type="radio" name="visible" value="unchanged" checked />
+            <span>No change</span>
+          </label>
+        </div>
+      </div>
+
+      <button class="paste-button" type="submit">Paste</button>
+    </form>
+
+    <script type="module" src="/src/context-menu.js"></script>
+  </body>
+</html>

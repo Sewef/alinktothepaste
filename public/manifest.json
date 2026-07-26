@@ -1,0 +1,12 @@
+{
+  "name": "A Link to the Paste",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "background_url": "/",
+  "permissions": [
+    {
+      "name": "clipboard-read",
+      "reason": "Read and paste the text from the clipboard, locally edit then paste."
+    }
+  ]
+}
