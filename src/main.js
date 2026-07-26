@@ -7,7 +7,7 @@ OBR.onReady(async () => {
         icons: [
             {
                 icon: "/icon.svg",
-                label: "A Link to the Paste",
+                label: "Special Paste",
                 filter: {
                     min: 0,
                     max: 0,
