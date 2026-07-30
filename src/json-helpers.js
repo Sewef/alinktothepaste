@@ -63,8 +63,33 @@ export function setVisible(json, visible) {
 }
 
 export function setPosition(json, position) {
-    getSharedItems(json).forEach(item => {
-        item["position"] = { ...position };
+    const positionedItems = getSharedItems(json).filter(
+        (item) =>
+            Number.isFinite(item["position"]?.x) &&
+            Number.isFinite(item["position"]?.y),
+    );
+
+    if (positionedItems.length === 0) {
+        return json;
+    }
+
+    const xs = positionedItems.map((item) => item["position"].x);
+    const ys = positionedItems.map((item) => item["position"].y);
+    const center = {
+        x: (Math.min(...xs) + Math.max(...xs)) / 2,
+        y: (Math.min(...ys) + Math.max(...ys)) / 2,
+    };
+    const offset = {
+        x: position.x - center.x,
+        y: position.y - center.y,
+    };
+
+    positionedItems.forEach((item) => {
+        item["position"] = {
+            x: item["position"].x + offset.x,
+            y: item["position"].y + offset.y,
+        };
     });
+
     return json;
 }
