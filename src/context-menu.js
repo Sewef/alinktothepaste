@@ -38,6 +38,10 @@ form.addEventListener("submit", async (event) => {
         await applyPasteOptions(clipboardJson, options);
         const items = getSharedItems(clipboardJson);
         await OBR.scene.items.addItems(items);
+        await OBR.player.select(
+            items.map((item) => item.id),
+            true,
+        );
         await OBR.notification.show(
             `${items.length} item${items.length === 1 ? "" : "s"} pasted`,
             "SUCCESS",
