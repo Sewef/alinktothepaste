@@ -2,6 +2,7 @@
   "name": "A Link to the Paste",
   "version": "1.0.0",
   "manifest_version": 1,
+  "icon": "https://alinktothepaste.onrender.com/icon.svg",
   "background_url": "/",
   "permissions": [
     {
