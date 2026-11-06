@@ -11,12 +11,23 @@ import {
 } from "./json-helpers.js";
 
 const form = document.querySelector("#paste-options");
+const ownershipPlayer = document.querySelector("#ownership-player");
 let isObrReady = false;
+let roomPlayers = [];
 
 OBR.onReady(async () => {
     applyTheme(await OBR.theme.getTheme());
     OBR.theme.onChange(applyTheme);
+
+    updateRoomPlayers(await OBR.party.getPlayers());
+    OBR.party.onChange(updateRoomPlayers);
     isObrReady = true;
+});
+
+form.addEventListener("change", (event) => {
+    if (event.target.name === "ownership") {
+        updateOwnershipPlayerVisibility();
+    }
 });
 
 form.addEventListener("submit", async (event) => {
@@ -90,6 +101,16 @@ async function applyPasteOptions(json, options) {
 
     if (options.ownership === "take") {
         setOwner(json, await OBR.player.id);
+    } else if (options.ownership === "give") {
+        const recipient = roomPlayers.find(
+            (player) => player.id === options.ownerPlayerId,
+        );
+
+        if (!recipient) {
+            throw new Error("The selected player is no longer in the room.");
+        }
+
+        setOwner(json, recipient.id);
     } else {
         setMissingOwners(json, await OBR.player.id);
     }
@@ -110,6 +131,32 @@ async function applyPasteOptions(json, options) {
 
         setPosition(json, viewportCenter);
     }
+}
+
+function updateRoomPlayers(players) {
+    const selectedPlayerId = ownershipPlayer.value;
+    roomPlayers = players;
+    ownershipPlayer.replaceChildren(
+        ...players.map((player) => {
+            const option = document.createElement("option");
+            option.value = player.id;
+            option.textContent = player.name;
+            return option;
+        }),
+    );
+
+    if (players.some((player) => player.id === selectedPlayerId)) {
+        ownershipPlayer.value = selectedPlayerId;
+    }
+
+    updateOwnershipPlayerVisibility();
+}
+
+function updateOwnershipPlayerVisibility() {
+    const giveOwnership =
+        form.elements.namedItem("ownership").value === "give";
+    ownershipPlayer.hidden = !giveOwnership;
+    ownershipPlayer.disabled = !giveOwnership;
 }
 
 function applyTheme(theme) {

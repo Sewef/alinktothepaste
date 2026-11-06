@@ -32,7 +32,19 @@
             <input type="radio" name="ownership" value="unchanged" checked />
             <span>No change</span>
           </label>
+          <label>
+            <input type="radio" name="ownership" value="give" />
+            <span>Give</span>
+          </label>
         </div>
+        <select
+          class="ownership-player"
+          id="ownership-player"
+          name="ownerPlayerId"
+          aria-label="Player receiving ownership"
+          disabled
+          hidden
+        ></select>
       </div>
 
       <div class="paste-choice" role="group" aria-labelledby="position-label">
